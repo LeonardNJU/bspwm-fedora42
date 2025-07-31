@@ -12,6 +12,7 @@ picom
 dunst
 feh
 scrot
+vim
 
 x11
 
@@ -20,25 +21,32 @@ first run `install_requirements.sh`
 
 then run `preparation.sh`
 
-finally choose bspwm in sddm and super+return to get fisrt kitty.
+finally choose bspwm in sddm and hyper+return to get fisrt kitty.
+
+
+# VIM
+little tweaks
 
 # BSPWM
 - add PATHS for editing bspwm & sxhkd config
 - add Wallpaper and its PATH
-- TODO add input method
 - add polybar
 - add dunst for notification
-- TODO replace kitty conf for opacity settings
-- 
 
 # SXHKD
 - add Super+E to open file-explorer
 - add Super+v/V to hide/unhide windows
 - add Print to take screenshot, copy and save it to Pictures
 
+# Other changes
+- set `Caps Lock` to `Hyper`
+- set `ibus` by `.xprofile`
+- add customized picom conf
+
 # Next
 - maybe add ranger back
 - tweak xrandr option
+    - `xrandr --output DP-0 --mode aaaaxbbb`
 - add battery and wifi module
 - add neovim in
 - should see this https://gist.github.com/amit08255/43ed6efdc1952d88f9a61e86f375e924

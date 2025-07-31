@@ -15,7 +15,8 @@ dunst &
 
 bash $HOME/.config/polybar/launch.sh
 
-# TODO： add input method
+setxkbmap -option caps:hyper
+
 
 bspc monitor -d I II III IV V VI VII VIII IX X
 

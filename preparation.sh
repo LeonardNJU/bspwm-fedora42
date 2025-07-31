@@ -1,37 +1,59 @@
+#!/bin/bash
+
 CFGDIR="$HOME/.config"
+CURRENT_DIR=$(pwd)
 
-# 0. move xprofile
-cp dotfile/xprofile $HOME/.xprofile
+echo "[INFO] Moving xprofile..."
+if cp dotfile/xprofile "$HOME/.xprofile"; then
+    echo "[SUCCESS] xprofile moved."
+else
+    echo "[ERROR] Failed to move xprofile."
+fi
 
-# 1. prepare kitty, since default font in kitty is awful
-mkdir -p $CFGDIR/kitty
-cp dotfile/kitty.conf $CFGDIR/kitty/
+echo "[INFO] Setting up kitty config and fonts..."
+mkdir -p "$CFGDIR/kitty"
+cp dotfile/kitty.conf "$CFGDIR/kitty/"
+if sudo cp -r fonts/* /usr/share/fonts/; then
+    echo "[SUCCESS] Fonts installed."
+else
+    echo "[ERROR] Failed to install fonts."
+fi
 
-# 2. setup bspwm and sxhkd
-cd $CFGDIR || echo "$CFGDIR doesn't exist." && exit
-mkdir bspwm sxhkd
-cp dotfile/bspwmrc bspwm/
-cp dotfile/sxhkdrc sxhkd/
+echo "[INFO] Setting up bspwm and sxhkd..."
+cd "$CFGDIR" || { echo "[ERROR] $CFGDIR doesn't exist."; exit 1; }
+mkdir -p bspwm sxhkd
+cp "$CURRENT_DIR/dotfile/bspwmrc" bspwm/
+cp "$CURRENT_DIR/dotfile/sxhkdrc" sxhkd/
+echo "[SUCCESS] bspwm and sxhkd config installed."
 
-# 3. setup wallpaper
-ln -s /usr/share/backgrounds/default.jxl ~/Pictures/wall-img
+echo "[INFO] Setting up wallpaper..."
+LANG=C xdg-user-dirs-update
+ln -sf /usr/share/backgrounds/default.jxl "$HOME/Pictures/wall-img"
+echo "[SUCCESS] Wallpaper link created."
 
-# 4. compositor
-mkdir picom
-cp dotfile/picom.conf picom/
+echo "[INFO] Setting up picom config..."
+mkdir -p picom
+cp "$CURRENT_DIR/dotfile/picom.conf" picom/
+echo "[SUCCESS] picom config installed."
 
-# 5. polybar
-mkdir polybar
+echo "[INFO] Setting up polybar config..."
+mkdir -p polybar
 cp /usr/share/doc/polybar/examples/config.ini polybar/
-cp dotfile/polybar_launch.sh polybar/launch.sh
+cp "$CURRENT_DIR/dotfile/polybar_launch.sh" polybar/launch.sh
+echo "[SUCCESS] polybar config installed."
 
-# 6. dunst
-mkdir dunst
-cp /etc/dunst/dunstrc dunst/
+echo "[INFO] Setting up dunst config..."
+mkdir -p dunst
+cp /etc/xdg/dunst/dunstrc dunst/
+echo "[SUCCESS] dunst config copied."
 
-# 7. vim
-cp dotfile/vimrc $HOME/.vimrc
+echo "[INFO] Installing vimrc..."
+cp "$CURRENT_DIR/dotfile/vimrc" "$HOME/.vimrc"
+echo "[SUCCESS] vimrc installed."
 
-# Disable GDM and enable sddm to embrace new bspwm!
-sudo systemctl disable gdm
-sudo systemctl enable --now sddm
+echo "[INFO] Switching from GDM to SDDM..."
+sudo systemctl disable gdm && \
+sudo systemctl stop gdm && \
+sudo systemctl enable --now sddm && \
+echo "[SUCCESS] GDM disabled, SDDM enabled." || \
+echo "[ERROR] Failed to switch display manager."

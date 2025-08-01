@@ -50,3 +50,4 @@ little tweaks
 - add battery and wifi module
 - add neovim in
 - should see this https://gist.github.com/amit08255/43ed6efdc1952d88f9a61e86f375e924
+- add my recording2text scripts

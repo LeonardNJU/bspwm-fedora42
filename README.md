@@ -44,10 +44,16 @@ little tweaks
 - add customized picom conf
 
 # Next
-- maybe add ranger back
+- try lf: https://github.com/gokcehan/lf
+- add mpv
 - tweak xrandr option
     - `xrandr --output DP-0 --mode aaaaxbbb`
 - add battery and wifi module
 - add neovim in
 - should see this https://gist.github.com/amit08255/43ed6efdc1952d88f9a61e86f375e924
 - add my recording2text scripts
+- watch this: https://github.com/LukeSmithxyz/voidrice/tree/master?tab=readme-ov-file
+- also check this: https://lukesmith.xyz/programs/
+- maybe ... NEWSBOAT of RSS feed?
+- zathura for pdf
+- sxiv for image
